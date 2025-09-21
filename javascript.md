@@ -1,22 +1,41 @@
 ### 1. Hoisting.
+
 ### 2. Closures.
+
 ### 3. Var, Let, Const & Temporal Dead Zone.
+
 ### 4. This keyword.
+
 ### 5. Callback Functions.
+
 ### 6. Null and Undefined.
+
 ### 7. Promises, Promise APIs, Promise Chaining.
+
 ### 8. Async and Await.
+
 ### 9. Call, Apply, Bind.
+
 ### 10. Event loop in js.
+
 ### 11. Arrow Function and Regular Function.
+
 ### 12. Shallow and Deep copy.
+
 ### 13. Prototype and Prototypal Inheritance?
+
 ### 14. First Class Function.
+
 ### 5. Anonymous Functions
+
 ### 16. Higher Order Function.
+
 ### 17. Scopes.
+
 ### 18. ES6.
+
 ### 19. OOPS in js.
+
 ### 20. Currying in js.
 
 # Hoisting
@@ -591,7 +610,9 @@ Example:-
 ### Object Seal
 
 ##### Prevents adding new properties
+
 ##### Prevents removing existing properties.
+
 ##### You can still update existing properties.
 
 ### Object Freeze
@@ -601,3 +622,79 @@ Example:-
 ##### Prevents deleting properties.
 
 ##### ❌ Prevents modifying existing property values.
+
+# Pass by value & reference
+
+### Pass by Value
+
+##### Used for Primitive Value
+
+##### Copy of value is passed
+
+##### No — changes do not affect the original value
+
+##### Two different memory locations
+
+# Pass by Reference
+
+##### Used for Non Primitive Value
+
+##### A reference is passed
+
+##### Changes afftect the original Value
+
+##### Same memory location
+
+# Map & Filter
+
+### Map
+
+##### Transforms each element in an array
+
+##### Returns a new array of the same length
+
+##### Callback Expects a return value for each element
+
+##### Not mutated
+
+### Filter
+
+##### Filters out elements based on a condition
+
+##### Returns a new array with fewer or equal elements
+
+##### Callback returns a boolean (true/false)
+
+##### ❌ Not mutated
+
+# Map & forEach
+
+### Map
+
+##### Creates a new array by transforming each element
+
+##### Returns a new array
+
+##### Map can be chainable
+
+##### Does not modify original array
+
+### forEach
+
+##### Executes a function for each element.
+
+##### Return undefined
+
+##### forEach can not be chainable
+
+##### Does not modify original array
+
+# CORS
+
+### CORS stands for Cross-Origin Resource Sharing.
+
+##### It’s a security mechanism enforced by browsers to restrict cross-origin HTTP requests initiated from scripts.
+
+##### By default, the browser only allows requests to the same origin (same protocol, domain, and port).
+
+##### If a frontend hosted at http://localhost:3000 tries to make a request to https://api.example.com, it will be blocked ##### unless CORS is enabled on the server.
