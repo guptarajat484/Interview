@@ -38,6 +38,56 @@
 
 ### 20. Currying in js.
 
+### 21. What are the possible ways to create objects.
+
+### 22. Pure function and its benefits
+
+### 23. Impure function
+
+### 24. IIFE
+
+### 25. Strict Mode
+
+### 26. Delete operator
+
+### 27. Js is Compiled or Interpreted Language
+
+### 28. Global Variables
+
+### 29. Diff Between proto and prototype
+
+### 30. Spread and Rest Operator
+
+### 31. Call Stack
+
+### 32. Const and Object Freeze
+
+### 33. Lexical Scoping
+
+### 34. Map and forEach
+
+### 35. Memory Management
+
+### 36. How To handle Error in JS
+
+### 37. How to Improve Performance in Js 
+
+### 38. what are memory leaks in Js
+
+### 39. What are the limitations of Js in Large Scale applications
+
+### 40. Prototype Chain
+
+### 41. What is JSON
+
+### 42. What is a polyfill
+
+### 43. Javascript and Typescript
+
+### 44.Advantages of typescript over javascript
+
+### 45. How do you make first letter of the string in an uppercase
+
 # Hoisting
 
 ### Hoisting is a concept that enables us to extract the values of variables and functions even before initialization or assignment without encountering an error. This occurs due to the first phase (memory creation phase) of the Execution Context. In this initial phase, the JavaScript engine allocates memory to all variables and functions. For variables, it assigns the value undefined, and for functions, it copies the entire function body.

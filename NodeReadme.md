@@ -11,6 +11,7 @@ A structured collection of **Node.js, Express.js, Database, Security, and System
 - What is the difference between Node.js and JavaScript?
 - What kind of API functions are supported by Node.js?
 - Is Node.js single-threaded?
+- What are the advantages of Node.js?
 - What are the main disadvantages of Node.js?
 
 ### Modules & Package Management
@@ -19,6 +20,9 @@ A structured collection of **Node.js, Express.js, Database, Security, and System
 - How do you import a module in Node.js?
 - What is `package.json`, and why is it essential?
 - What is `npm`, and what are its advantages?
+- What is Package.json?
+- what is Package.lock.json?
+- Diff between carat and tilde?
 
 ### Express.js Basics
 - What is Express.js, and why is it commonly used with Node.js?
@@ -40,9 +44,11 @@ A structured collection of **Node.js, Express.js, Database, Security, and System
 - What is the Event Loop in Node.js, and what are its phases?
 - How does the event loop manage asynchronous operations?
 - How does Node.js handle concurrency despite being single-threaded?
+- How does Node.js handles CPU-intensive task?
 
 ### Asynchronous Programming
 - What are callbacks in Node.js?
+- What is difference between Synchronous and Async Programming in Node.js?
 - What is "callback hell," and how can it be avoided? (3 methods)
 - What are Promises, and how do they improve async handling?
 - How does `async/await` work?
@@ -79,6 +85,7 @@ A structured collection of **Node.js, Express.js, Database, Security, and System
 - What’s the difference between Worker Threads and Child Processes?
 - What is the difference between `spawn()` and `fork()`?
 - What is a cluster in Node.js, and why is it used?
+- How do you scale Node.js horizontally?
 
 ### Memory & Performance
 - How do you detect and fix memory leaks in Node.js?
@@ -89,6 +96,8 @@ A structured collection of **Node.js, Express.js, Database, Security, and System
 
 ### Security
 - What are the most common security vulnerabilities in Node.js, and how do you prevent them?
+- How Do you Prevent SQL Injection?
+- How Do you protect from CSRF and XSS Attack?
 - What is prototype pollution, and how can you prevent it?
 - How do you implement rate limiting & brute-force protection in Express?
 - How do you securely store API keys and secrets in Node.js?
@@ -118,6 +127,9 @@ A structured collection of **Node.js, Express.js, Database, Security, and System
 - How do you deploy a Node.js app (steps & best practices)?
 - What is process management, and which tools (PM2, Docker, Kubernetes) are used?
 - How does CI/CD help in Node.js projects?
+- How do you manage environment variables
+- How do you implement structured logging in Node.js?
+- What Monitoring & alerting strategies do you use in production (Grafana, Promothus and loki)?
 
 ### Real-Time & Microservices
 - What are WebSockets, and how are they implemented in Node.js?
