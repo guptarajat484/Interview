@@ -319,3 +319,9 @@ export class UserController {
 
 }
 ```
+
+------------------------------------------------------------------------
+## What is Dependency Injection?
+
+Dependency Injection is a design pattern where a class receives its dependencies from the outside instead of creating them itself.
+
