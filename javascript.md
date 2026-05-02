@@ -76,7 +76,7 @@
 
 ### 39. What are the limitations of Js in Large Scale applications
 
-### 42. What is a polyfill
+### 40. What is a polyfill
 
 # Hoisting
 
