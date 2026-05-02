@@ -76,17 +76,7 @@
 
 ### 39. What are the limitations of Js in Large Scale applications
 
-### 40. Prototype Chain
-
-### 41. What is JSON
-
 ### 42. What is a polyfill
-
-### 43. Javascript and Typescript
-
-### 44.Advantages of typescript over javascript
-
-### 45. How do you make first letter of the string in an uppercase
 
 # Hoisting
 
@@ -748,3 +738,170 @@ Example:-
 ##### By default, the browser only allows requests to the same origin (same protocol, domain, and port).
 
 ##### If a frontend hosted at http://localhost:3000 tries to make a request to https://api.example.com, it will be blocked ##### unless CORS is enabled on the server.
+
+## Memory Management in js
+
+Memory management in JavaScript is the process of allocating memory when needed and automatically freeing it when it’s no longer used, using a mechanism called Garbage Collection.
+
+## Memory Lifecycle
+
+- Allocation: Memory is allocated when variables/objects are created
+- Usage: You read/write memory
+- Deallocation (Garbage Collection): Memory is freed automatically
+
+## Garbage Collection
+
+JavaScript uses Mark-and-Sweep algorithm
+### 👉 How it works:
+- Start from root objects (global scope)
+- Mark all reachable objects
+- Remove unreachable ones
+
+``` ts 
+let user = { name: "Rajat" };
+user = null; // eligible for garbage collection
+```
+
+## Memory Leaks
+
+Memory leak = memory not released when it should be
+
+### ❌ Common Causes
+- Global Variables 
+``` ts
+ name = "Rajat"; // ❌ no var/let/const 
+```
+- Closures: bigData stays in memory ❌
+``` ts
+function outer() {
+  let bigData = new Array(1000000);
+
+  return function inner() {
+    console.log("Hello");
+  };
+}
+```
+- Forgotten Timers: If not cleared → memory leak
+``` ts
+setInterval(() => {
+  console.log("Running...");
+}, 1000);
+```
+- Event Listeners: Not removed → memory leak
+``` ts
+element.addEventListener("click", () => {}); 
+```
+
+## How To handle Error in JS
+
+### 1. Try, catch
+``` ts
+try {
+  const result = JSON.parse("invalid json");
+} catch (error) {
+  console.error("Error:", error.message);
+}
+```
+### 2. Finally Block
+``` ts
+try {
+  console.log("Try block");
+} catch (e) {
+  console.log("Error");
+} finally {
+  console.log("Always runs");
+} 
+```
+### 3. Throwing Custom Errors
+``` ts
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Division by zero");
+  }
+  return a / b;
+}
+``` 
+### 4. Global Error Handling
+``` ts
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("Unhandled Rejection:", err);
+});
+```
+### 5. Express Error Handling Middleware
+```ts
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).json({
+    message: err.message
+  });
+});
+```
+
+## How to Improve Performance in Js
+
+### 1. Avoid Blocking the Event Loop
+
+```ts
+for (let i = 0; i < 1e9; i++) {} // blocks thread ❌
+```
+
+### Use Asynchronous Code Properly
+
+#### 1. ❌ Sequential (Slow)
+```ts
+await fetchA();
+await fetchB();
+```
+
+#### 2. ✅ Parallel (Fast)
+```ts 
+await Promise.all([fetchA(), fetchB()]);
+```
+
+#### 3. Use Caching
+
+## Difference between concurrency vs parallelism?
+
+### 1. Concurrency
+
+Concurrency is the ability to manage multiple tasks at the same time, but not necessarily executing them simultaneously.
+
+```ts
+async function run() {
+  const p1 = fetch("api1"); // starts
+  const p2 = fetch("api2"); // starts
+
+  await p1;
+  await p2;
+} 
+```
+
+- Both tasks are in progress together (concurrent)
+#### Example
+
+Async/await, Promises
+### 2. Parallelism
+
+Parallelism is when multiple tasks are executed simultaneously using multiple threads or processors.
+
+```ts
+const { Worker } = require("worker_threads");
+
+new Worker("./task1.js");
+new Worker("./task2.js");
+```
+- Tasks run at the exact same time
+- Both run in separate threads → true parallel execution
+
+#### Example
+Worker Threads, Clusters
+
+## Limitations of JavaScript in Large-Scale Applications
+
+- Lack of Static Typing (Without TypeScript)
+- Callback Hell / Async Complexity
+- Single-Threaded Nature
+- Global Scope & Bugs
