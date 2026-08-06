@@ -32,26 +32,23 @@
 23. What is a Foreign Key?
 24. Difference between Primary Key and Unique Key.
 25. What is a Composite Key?
-26. What is a Candidate Key?
-27. What is a Super Key?
-28. What is an Alternate Key?
-29. What is Referential Integrity?
+26. What is Referential Integrity?
 
 ## Indexes & Performance Optimization
-30. What is an Index?
-31. Explain different types of indexes.
-32. Difference between Clustered and Non-Clustered Index.
-33. What is a Composite Index?
-34. What is a Covering Index?
-35. Advantages and disadvantages of indexes.
-36. What causes Full Table Scan?
-37. How do indexes improve performance?
-38. When should indexes be avoided?
-39. What is query optimization?
-40. What is an Execution Plan?
-41. What is the difference between Index Scan and Index Seek?
-42. How to optimize slow SQL queries?
-43. Why does pagination using OFFSET become slow?
+27. What is an Index?
+28. Explain different types of indexes.
+29. Difference between Clustered and Non-Clustered Index.
+30. What is a Composite Index?
+31. What is a Covering Index?
+32. Advantages and disadvantages of indexes.
+33. What causes Full Table Scan?
+34. How do indexes improve performance?
+35. When should indexes be avoided?
+36. What is query optimization?
+37. What is an Execution Plan?
+38. What is the difference between Index Scan and Index Seek?
+39. How to optimize slow SQL queries?
+40. Why does pagination using OFFSET become slow?
 
 ## Window Functions
 
@@ -647,7 +644,7 @@ It references the primary key of another table.
 - Multiple allowed
 - Null allowed
 
-25. What is a Composite Key?
+## 25. What is a Composite Key?
 
 Composite Key uses multiple columns together to uniquely identify a row.
 
@@ -664,69 +661,316 @@ student_id alone → not unique
 course_id alone → not unique
 combination becomes unique
 
-## 26. What is a Candidate Key?
+## 26. What is Referential Integrity?
 
-Candidate Key is a column (or combination) that can uniquely identify records.
+Referential Integrity ensures relationships between tables remain valid.
 
-A table can have multiple candidate keys.
+Foreign key values must exist in parent table.
 
-One candidate key becomes Primary Key.
+## 27. What is an Index?
 
-### Example
+An Index is a database object used to improve the speed of data retrieval operations.
 
-- id: 1 
-- email: raj@gmail.com
-- phone: 909099099090
+It works similarly to an index in a book:
 
-Possible Candidate Keys
-- id
-- email
-- phone
+Instead of scanning every page,
+You directly jump to the required page.
 
-## 27. What is a Super Key?
-
-Super Key is any set of columns that uniquely identifies rows.
-
-It may contain extra unnecessary columns.
+Without index → Full Table Scan
+With index → Faster lookup
 
 ### Example
-id:- 1
-email: raj@gmail.com
-name: raj
+```ts
+CREATE INDEX idx_employee_name
+ON employees(name);
+```
 
-Possible Super keys
+### How Index Works Internally
 
-- id,
-- email
-- id+email
-- id+name
+Most Databases Use:
 
-### Important Point
+- B-Tree indexes
+- Hash indexes
 
-Every candidate key is a super key, but every super key is not a candidate key.
+Index Stores
 
-## 28. What is an Alternate Key?
+- Indexed column wise
+- Pointer/refernce to actual rows
 
-Alternate Key is a candidate key that was not selected as primary key.
+Most databases use:
 
-### Example
+ - B-Tree indexes
+ - Hash indexes
 
-id: 1
-email: raja@gmail.com
+Index stores:
 
-if
-- EmployeeId is Primary Key
-- Aadhaar Number is Alternate Key
+- Indexed column values
+- Pointer/reference to actual rows
+
+#### Real-Time Backend Example
+
+Suppose:
+
+- Users table has 10 million rows.
+- API searches user by email.
+
+Without index:
+
+DB scans all rows.
+
+With index:
+
+DB directly jumps to matching row.
+
+Huge performance improvement.
+
+Indexes improve:
+
+- SELECT
+- WHERE
+- JOIN
+- ORDER BY
+- GROUP BY
+
+But may slow:
+
+- INSERT
+- UPDATE
+- DELETE
+
+## Explain Different Types of Indexes
+
+#### 1. Clustered Index
+
+Stores actual table data physically in sorted order.
+
+Only one clustered index per table.
+
+```ts
+CREATE CLUSTERED INDEX idx_emp_id
+ON employees(id);
+```
+
+#### 2. Non-Clustered Index
+
+Separate structure containing:
+
+Indexed values
+Pointer to actual rows
+
+Multiple non-clustered indexes allowed
+
+Example
+```ts
+CREATE INDEX idx_emp_name
+ON employees(name);
+```
+
+#### 3. Composite Index
+
+Index on multiple columns.
+
+```ts
+CREATE INDEX idx_dept_salary
+ON employees(department_id, salary);
+```
+
+#### 4. Unique Index
+
+Ensures uniqueness.
+
+```ts
+CREATE UNIQUE INDEX idx_email
+ON users(email);
+```
+
+#### 5. Full-Text Index
+Used for Text Searching
+
+Example
+
+Search engines, article search.
+
+## Difference Between Clustered and Non-Clustered Index
+
+### Clustered Index
+
+- Stores actual data physically
+- Only one Allowed
+- Faster for Range queries
+- Table organized by index
+- Larger changes during updates
+
+### Non-Clustered Index
+
+- Seperate index structure
+- Multiple allowed
+- Faster for exact lookups
+- Table order unchanged
+- Less Expensive update
+
+### Visualization
+Clustered Index
+
+Data itself sorted:
+
+```ts
+1 → Raj
+2 → Amit
+3 → Neha
+```
+
+Non- Clustered Index
+
+```ts
+Raj → Pointer to row
+Amit → Pointer to row
+```
+Interview Tip
+
+Primary key often creates clustered index automatically.
 
 
+## What is a Composite Index?
 
-### Important Point
+Composite Index contains multiple columns.
 
-Candidate keys:
+Useful when queries filter using multiple columns together.
 
-Must be unique
-Cannot contain NULL
+```ts
+CREATE INDEX idx_emp
+ON employees(department_id, salary);
+```
 
+## 6. Advantages and Disadvantages of Indexes
+
+### Advantages
+
+- Faster select Lookups
+- Faster JOIN Operations
+- Faster Sorting and Grouping
+- Better Performance for Large Data
+
+### Disadvantages
+
+- Slow Index
+- Slow update
+- Slow Delete
+- Extra Space
+
+## 7. What Causes Full Table Scan?
+
+Full Table Scan occurs when database scans every row.
+
+Very expensive for large tables.
+
+Causes
+
+1. Missing Indexes
+2. Function on Indexed Column
+```ts
+WHERE LOWER(name) = 'raj'
+```
+
+## 8. How Do Indexes Improve Performance?
+
+Indexes reduces rows scanned
+
+Without Index:
+```ts
+1 -> 2 -> 3 -> 4 -> 5
+```
+
+With index:
+
+```ts
+Jump directly to matching row
+```
+
+## When Should Indexes Be Avoided?
+
+#### Small Tables
+
+- Full scan may already be fast.
+
+#### Frequently Updated Columns
+
+- Too many writes become expensive.
+
+#### Low Cardinality Columns
+
+Example:
+
+- gender
+- status
+
+Few unique values.
+
+#### Too Many Indexes
+
+Consumes memory/storage.
+
+## What is Query Optimization?
+
+Query optimization means improving SQL query performance.
+
+Goal:
+
+- Reduce execution time
+- Reduce resource usage
+
+### Optimization Techniques
+
+- Use Proper Indexes
+- Avoid SELECT *
+- Use WHERE Filters Early
+- Use Pagination
+- Avoid Nested Subqueries
+- Avoid Functions in WHERE
+
+## Analyze Execution Plan
+
+#### Use:
+
+- EXPLAIN
+- EXPLAIN ANALYZE
+
+## What is Execution Plan?
+
+Execution Plan shows how database executes query.
+
+It helps identify bottlenecks.
+
+Shows
+- Table Scans
+- Index Usage
+- Join Method
+- Sorting
+- Estimated Cost
+
+### Important Interview Point
+
+Execution plans help identify:
+
+Missing indexes
+Slow joins
+Expensive operations
+
+## 14. Why Does Pagination Using OFFSET Become Slow?
+
+OFFSET Pagination Example
+
+```ts
+SELECT *
+FROM employees
+LIMIT 10 OFFSET 100000;
+```
+
+#### Problem
+
+Database still scans/skips first 100000 rows before returning next 10 rows.
+
+Large OFFSET becomes expensive.
 
 ## 5. What are Triggers?
 

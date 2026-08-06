@@ -90,6 +90,44 @@
 
 ### Whenever an Execution Context is created, a Lexical environment(LE) is also created and is referenced in the local Execution Context(in memory space).
 
+```ts
+function xyz() {
+  let counter = 0;
+  return function count(){
+    return counter++
+  }
+}
+
+const y = xyz()  
+const z = xyz()  
+
+console.log(y()) //0
+console.log(y()) //1
+console.log(z()) //0
+console.log(z()) //1 
+```
+
+### Real-Time Closure Examples (Node.js)
+
+#### 1. Authentication Middleware
+```ts
+function authorize(role) {
+    return function(req, res, next) {
+        if (req.user.role === role) {
+            return next();
+        }
+
+        return res.status(403).json({
+            message: "Access Denied"
+        });
+    };
+}
+
+app.get('/admin', authorize('admin'), adminController);
+```
+
+I have used closures in role-based authorization middleware where the middleware remembers the allowed role and validates incoming requests.
+
 # Var
 
 ### <p>Scope Function-scoped</p>
@@ -399,6 +437,8 @@ Example:-
 
 ### Prototype
 
+##### A prototype in JavaScript is a mechanism that allows objects to inherit properties and methods from another object.
+
 ##### Every object in JavaScript has a hidden property called [[Prototype]] (you can access it using **proto** or Object.getPrototypeOf()).
 
 ##### This prototype is another object that the current object can inherit properties and methods from.
@@ -419,7 +459,7 @@ Example:-
 
 ##### };
 
-##### user.**proto** = person;
+##### user.__proto__ = person;
 
 ##### user.greet();
 
